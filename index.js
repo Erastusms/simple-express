@@ -1,6 +1,7 @@
 // Add Express
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 // Initialize Express
 const app = express();
 const PORT = 5555;
@@ -11,6 +12,7 @@ const mongoDBURL =
 // Please create a free database for yourself.
 // This database will be deleted after tutorial
 
+app.use(cors());
 
 // Create GET request
 app.get('/', (req, res) => {
