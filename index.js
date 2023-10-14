@@ -1,6 +1,7 @@
 // Add Express
 const express = require('express');
 const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
 const cors = require('cors');
 // Initialize Express
 const app = express();
@@ -39,17 +40,28 @@ app.get('/api/:id', async (request, response) => {
 //   console.log('Running on port 5000.');
 // });
 
-mongoose
-  .connect(mongoDBURL)
-  .then(() => {
+// mongoose
+//   .connect(mongoDBURL)
+//   .then(() => {
+//     console.log('App connected to database');
+//     app.listen(PORT, () => {
+//       console.log(`App is listening to port: ${PORT}`);
+//     });
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+
+MongoClient.connect(mongoDBURL, function (err, client) {
+  // perform actions on the collection object
+  try {
     console.log('App connected to database');
     app.listen(PORT, () => {
       console.log(`App is listening to port: ${PORT}`);
     });
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
+  } catch (err) {
+    client.close();
+  }
+});
 // Export the Express API
 module.exports = app;
