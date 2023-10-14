@@ -1,6 +1,5 @@
 // Add Express
 const express = require('express');
-const mongoose = require('mongoose');
 const MongoClient = require('mongodb').MongoClient;
 const cors = require('cors');
 // Initialize Express
